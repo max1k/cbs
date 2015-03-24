@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 
 from p311.models import File
 from p311.forms import UploadFileForm
-
+from p311.functions import handle_file
 
 class P311ListView(ListView):
 	model = File
@@ -20,4 +20,6 @@ class UploadFileView(FormView):
 	success_url = reverse_lazy('p311-success-add')
 
 	def form_valid(self, form):
+		handle_file(self.request.FILES['uploaded_file'])
 		return super(UploadFileView, self).form_valid(form)
+
