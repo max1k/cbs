@@ -1,0 +1,8 @@
+<form enctype="multipart/form-data" method="post" action="{% url 'p311-new' %}">
+	{% csrf_token %}
+	<table>
+	{{ form }}
+	</table>
+	<input type="submit" value="Submit" />
+
+</form>

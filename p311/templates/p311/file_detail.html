@@ -1,0 +1,13 @@
+{% block content %}
+    <p>{{ file.name }} {{ file.date }}</p>
+    <p>{{ file.orgname }}</p>
+    {% for result in file.result_set.all %}
+    	<p>{{ result.name }}</p>
+    	<p>{{ result.date }}</p>
+    	<p>{{ result.service }}</p>
+    	<p>{{ result.processed }}</p>
+    	<p>{{ result.description }}</p>
+    {% endfor %}
+    <a href="{% url 'p311-list' %}"> К списку сообщений</a>
+    
+{% endblock %}
