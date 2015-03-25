@@ -4,7 +4,7 @@ from xml.etree.ElementTree import fromstring
 from datetime import datetime
 
 def handle_file(f):
-
+    
     fname = f.name
     count = File.objects.filter(name__endswith=fname[3:]).count()
     if count:
