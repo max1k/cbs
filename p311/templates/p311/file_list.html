@@ -1,6 +1,6 @@
 {% block content %}
     {% for file in files %}
-        <p>{{ file.date }} 
+        <p>{{ file.doc_date }} 
         <a href="{% url 'p311-detail' file.pk %}">{{ file.name }}</a>
         {{ file.orgname }}</p>
     {% empty %}

@@ -4,7 +4,8 @@ from django.db import models
 
 class CommonInfo(models.Model):
 	name = models.CharField(max_length=100)
-	date = models.DateField(auto_now=True)
+	mod_date = models.DateField(auto_now=True)
+	doc_date = models.DateField(null=True)
 
 	def __str__(self):
 		return self.name	
@@ -16,4 +17,4 @@ class Result(CommonInfo):
 	src_file = models.ForeignKey(File)
 	service = models.CharField(max_length=3)
 	processed = models.BooleanField(default=False)
-	description = models.CharField(max_length=250)
+	description = models.CharField(max_length=250, null=True)

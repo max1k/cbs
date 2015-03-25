@@ -1,9 +1,9 @@
 {% block content %}
-    <p>{{ file.name }} {{ file.date }}</p>
+    <p>{{ file.name }} {{ file.doc_date }}</p>
     <p>{{ file.orgname }}</p>
     {% for result in file.result_set.all %}
     	<p>{{ result.name }}</p>
-    	<p>{{ result.date }}</p>
+    	<p>{{ result.doc_date }}</p>
     	<p>{{ result.service }}</p>
     	<p>{{ result.processed }}</p>
     	<p>{{ result.description }}</p>
