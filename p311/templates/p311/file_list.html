@@ -10,13 +10,13 @@
     	<tr>
     		<td>{{ file.doc_date|date:"d.m.Y" }}</td>
         	<td><a href="{% url 'p311-detail' file.pk %}">{{ file.name }}</a></td>
-        	<td>{{ file.orgname }}</td>
+        	<td><a href="{% url 'p311-orgmessage' file.orgname %}">{{ file.orgname }}</a></td>
         </tr>
     {% empty %}
     <p>Нет записей</p>
     {% endfor %}
     </table>
-    <p><a href="{% url 'p311-new' %}">Добавить</a></p>
+    <p><a href="{% url 'p311-new' %}">Загрузить файл</a></p>
 {% endblock %}
 
 {% block paginator %}
@@ -24,13 +24,13 @@
 <div class="pagination">
     <span class="page-links">
     {% if page_obj.has_previous %}
-    <a href="{% url 'p311-list' %}?page={{ page_obj.previous_page_number }}">← сюда</a>
+    <a href="{% url 'p311-list-page' page_obj.previous_page_number %}">← сюда</a>
     {% endif %}
     <span class="page-current">
     Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
     </span>
     {% if page_obj.has_next %}
-    <a href="{% url 'p311-list' %}?page={{ page_obj.next_page_number }}">туда →</a>
+    <a href="{% url 'p311-list-page' page_obj.next_page_number %}">туда →</a>
     {% endif %}
     </span>
 </div>

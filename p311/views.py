@@ -18,6 +18,11 @@ class P311ListView(ListView):
 		qs=File.objects.all().order_by('-doc_date')
 		return qs
 
+class P311OrgListView(P311ListView):
+	def get_queryset(self):
+		qs=super(P311ListView, self).get_queryset().filter(orgname=self.kwargs['orgname'])
+		return qs
+
 class P311DetailView(DetailView):
 	model = File
 
