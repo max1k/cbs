@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <title>Мониторинг сообщений</title>
+    <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "bootstrap/css/bootstrap-responsive.css" %}" rel="stylesheet">
+    <script src="{% static "bootstrap/js/bootstrap.js" %}"></script>
+    {% block extrahead %}
+    {% endblock %}
+    <script type="text/javascript">
+    $(function(){
+    {% block jquery %}
+    {% endblock %}
+    });
+    </script>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <div class="brand">Тестовый блог</div>
+            <ul class="nav">
+                <li><a href="{% url 'p311-list' %}" class="">311-П</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    {% block content %}
+    Нет загруженных сообщений
+    {% endblock %}
+
+    {% block paginator %}
+    {% endblock %}     
+</div> <!-- container -->
+
+</body>
+</html>

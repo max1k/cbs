@@ -1,10 +1,38 @@
+{% extends 'base.html' %}
 {% block content %}
+    <table cols='3'>
+    <tr>
+    	<td>Дата</td>
+    	<td>Файл</td>
+    	<td>Контрагент</td>
+    </tr>
     {% for file in files %}
-        <p>{{ file.doc_date }} 
-        <a href="{% url 'p311-detail' file.pk %}">{{ file.name }}</a>
-        {{ file.orgname }}</p>
+    	<tr>
+    		<td>{{ file.doc_date|date:"d.m.Y" }}</td>
+        	<td><a href="{% url 'p311-detail' file.pk %}">{{ file.name }}</a></td>
+        	<td>{{ file.orgname }}</td>
+        </tr>
     {% empty %}
     <p>Нет записей</p>
     {% endfor %}
+    </table>
     <p><a href="{% url 'p311-new' %}">Добавить</a></p>
+{% endblock %}
+
+{% block paginator %}
+{% if is_paginated %}
+<div class="pagination">
+    <span class="page-links">
+    {% if page_obj.has_previous %}
+    <a href="{% url 'p311-list' %}?page={{ page_obj.previous_page_number }}">← сюда</a>
+    {% endif %}
+    <span class="page-current">
+    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+    </span>
+    {% if page_obj.has_next %}
+    <a href="{% url 'p311-list' %}?page={{ page_obj.next_page_number }}">туда →</a>
+    {% endif %}
+    </span>
+</div>
+{% endif %}
 {% endblock %}

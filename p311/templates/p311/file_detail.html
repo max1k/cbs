@@ -1,12 +1,20 @@
+{% extends 'base.html' %}
 {% block content %}
-    <p>{{ file.name }} {{ file.doc_date }}</p>
-    <p>{{ file.orgname }}</p>
+    <p>
+    {{ file.name }} 
+    {{ file.doc_date|date:"d.m.Y" }}
+    {{ file.orgname }}
+    </p>
+    <br>
+    <p>Ответные сообщения:</p>
     {% for result in file.result_set.all %}
-    	<p>{{ result.name }}</p>
-    	<p>{{ result.doc_date }}</p>
-    	<p>{{ result.service }}</p>
-    	<p>{{ result.processed }}</p>
-    	<p>{{ result.description }}</p>
+    	<p>
+        {{ result.name }} 
+        {{ result.doc_date|date:"d.m.Y" }} 
+        {{ result.service }} 
+        {{ result.processed }} 
+        {{ result.description }}
+        </p>
     {% endfor %}
     <a href="{% url 'p311-list' %}"> К списку сообщений</a>
     

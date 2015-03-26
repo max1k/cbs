@@ -1,4 +1,4 @@
-from django.shortcuts import render
+#from django.shortcuts import render
 from django.views.generic import ListView, DetailView, FormView
 from django.core.urlresolvers import reverse_lazy
 
@@ -12,7 +12,11 @@ from django.utils.decorators import method_decorator
 class P311ListView(ListView):
 	model = File
 	context_object_name = 'files'
-	paginate_by = 30
+	paginate_by = 20
+
+	def get_queryset(self):
+		qs=File.objects.all().order_by('-doc_date')
+		return qs
 
 class P311DetailView(DetailView):
 	model = File
