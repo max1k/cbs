@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <table cols='3'>
+<div class="row">
+    <div class="col-md-9"> 
+    <table class="table table-bordered">
     <tr>
     	<td>Дата</td>
     	<td>Файл</td>
@@ -16,23 +18,35 @@
     <p>Нет записей</p>
     {% endfor %}
     </table>
+
+    </div>
+    <div class="col-md-3">
     <p><a href="{% url 'p311-new' %}">Загрузить файл</a></p>
+    </div>
+</div>
+    
 {% endblock %}
 
 {% block paginator %}
 {% if is_paginated %}
-<div class="pagination">
-    <span class="page-links">
+<nav>
+  <ul class="pagination pagination-lg">
     {% if page_obj.has_previous %}
-    <a href="{% url 'p311-list-page' page_obj.previous_page_number %}">← сюда</a>
+    <li>
+      <a href="{% url 'p311-list-page' page_obj.previous_page_number %}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
     {% endif %}
-    <span class="page-current">
-    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-    </span>
+    <li><a href="#">{{ page_obj.number }}</a></li>
     {% if page_obj.has_next %}
-    <a href="{% url 'p311-list-page' page_obj.next_page_number %}">туда →</a>
+    <li>
+      <a href="{% url 'p311-list-page' page_obj.next_page_number %}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
     {% endif %}
-    </span>
-</div>
+  </ul>
+</nav>
 {% endif %}
 {% endblock %}

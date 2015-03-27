@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 class P311ListView(ListView):
 	model = File
 	context_object_name = 'files'
-	paginate_by = 20
+	paginate_by = 15
 
 	def get_queryset(self):
 		qs=File.objects.all().order_by('-doc_date')
