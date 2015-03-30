@@ -15,13 +15,21 @@ class P311ListView(ListView):
 	paginate_by = 15
 
 	def get_queryset(self):
-		qs=File.objects.all().order_by('-doc_date')
+		qs = File.objects.all().order_by('-doc_date')
 		return qs
 
 class P311OrgListView(P311ListView):
 	def get_queryset(self):
-		qs=super(P311ListView, self).get_queryset().filter(orgname=self.kwargs['orgname'])
+		qs = super(P311ListView, self).get_queryset().filter(orgname=self.kwargs['orgname'])
 		return qs
+
+class P311UnansweredListView(P311ListView):
+	paginate_by = 200
+	def get_queryset(self):
+		qs = File.objects.all()
+		such_fiz=qs.filter(name__startswith='SFC').filter(result__service='nal')
+		such_ur= qs.filter(name__startswith='SBC').filter(result__service='nal').filter(result__service='pfr').filter(result__service='fss')
+		return qs.exclude(pk__in=such_fiz).exclude(pk__in=such_ur)
 
 class P311DetailView(DetailView):
 	model = File

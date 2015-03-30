@@ -9,7 +9,10 @@
     	<td>Контрагент</td>
     </tr>
     {% for file in files %}
-    	<tr>
+    	{% if file.is_done %}<tr class="success">
+        {% elif file.is_sent %}<tr class="info">
+        {% else %}<tr class="warning">
+        {% endif %}
     		<td>{{ file.doc_date|date:"d.m.Y" }}</td>
         	<td><a href="{% url 'p311-detail' file.pk %}">{{ file.name }}</a></td>
         	<td><a href="{% url 'p311-orgmessage' file.orgname %}">{{ file.orgname }}</a></td>

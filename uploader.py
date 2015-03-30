@@ -30,8 +30,8 @@ def send_file(url, file_name, path):
 	response = session.post(url, data=postdata, files=files)
 	return response
 
-path='/home/max1k/Документы/311P/IN/'
-mask='S*.XML'
+path='/home/max1k/Документы/311P/IN/Processed/'
+mask='UV*.xml'
 url='http://127.0.0.1:8000/p311/new/'
 
 for filename in glob('{0}{1}'.format(path, mask)):
