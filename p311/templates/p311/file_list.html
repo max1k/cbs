@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="row">
-    <div class="col-md-9"> 
+    <div class="col-md-12"> 
     <table class="table table-bordered">
     <tr>
     	<td>Дата</td>
@@ -20,9 +20,6 @@
     </table>
 
     </div>
-    <div class="col-md-3">
-    <p><a href="{% url 'p311-new' %}">Загрузить файл</a></p>
-    </div>
 </div>
     
 {% endblock %}
@@ -31,21 +28,27 @@
 {% if is_paginated %}
 <nav>
   <ul class="pagination pagination-lg">
+    
     {% if page_obj.has_previous %}
-    <li>
-      <a href="{% url 'p311-list-page' page_obj.previous_page_number %}" aria-label="Previous">
+    <li>      
+      <a href="{% url 'p311-list-page' 1 %}" aria-label="First">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
+    <li><a href="{% url 'p311-list-page' page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a></li>
     {% endif %}
-    <li><a href="#">{{ page_obj.number }}</a></li>
+    
+    <li class="active"><a href="#">{{ page_obj.number }}<span class="sr-only">(current)</span></a></li>
+
     {% if page_obj.has_next %}
+    <li><a href="{% url 'p311-list-page' page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a></li>
     <li>
-      <a href="{% url 'p311-list-page' page_obj.next_page_number %}" aria-label="Next">
+      <a href="{% url 'p311-list-page' page_obj.paginator.num_pages %}" aria-label="Last">
         <span aria-hidden="true">&raquo;</span>
-      </a>
+    </a>
     </li>
     {% endif %}
+
   </ul>
 </nav>
 {% endif %}

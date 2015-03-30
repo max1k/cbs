@@ -10,5 +10,5 @@ urlpatterns = patterns('',
 	url(r'^file(?P<pk>\d+)/$', P311DetailView.as_view(), name='p311-detail'),
 	url(r'^new/$', UploadFileView.as_view(), name='p311-new'),
 	url(r'^success-add/$', RedirectView.as_view(url='../'), name='p311-success-add'),
-	url(r'^(?P<orgname>[\w "]+)/$', P311OrgListView.as_view(), name='p311-orgmessage'),
+	url(r'^(?P<orgname>[\D -"]+)/$', P311OrgListView.as_view(), name='p311-orgmessage'),
 	)
