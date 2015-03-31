@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p>
-    {{ file.name }} 
-    {{ file.doc_date|date:"d.m.Y" }}
-    {{ file.orgname }}
-    </p>
-    <br>
-    <p>Ответные сообщения:</p>
+<table class="table">
+<tr class="info">
+    <td>{{ file.name }}</td>
+    <td>{{ file.doc_date|date:"d.m.Y" }}</td>
+    <td colspan="2">{{ file.orgname }}</td>
+</tr>
+<tr><td colspan="4" class="warning">Ответные сообщения:</td></tr>
     {% for result in file.result_set.all %}
-    	<p>
-        {{ result.name }} 
-        {{ result.doc_date|date:"d.m.Y" }} 
-        {{ result.service }} 
-        {{ result.processed }} 
-        {{ result.description }}
-        </p>
+    	{% if result.processed %}<tr class="success">{% else %}<tr class="error">{% endif %}
+        <td>{{ result.name }}</td>
+        <td>{{ result.doc_date|date:"d.m.Y" }}</td>
+        <td>{{ result.service }}</td>
+        {# result.processed #} 
+        <td>{{ result.description }}</td>
+        </tr>
     {% endfor %}
-    <a href="{% url 'p311-list' %}"> К списку сообщений</a>
-    
+</table>
+<a href="{% url 'p311-list' %}">← К списку сообщений</a>
 {% endblock %}

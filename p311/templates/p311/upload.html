@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<form enctype="multipart/form-data" method="post" action="{% url 'p311-new' %}">
+<form enctype="multipart/form-data" method="post" action="{% url 'p311-new' %}" class="form-inline">
 	{% csrf_token %}
-	<table>
-	{{ form }}
-	</table>
+	<div class="form-group">
+	{% for field in form %}
+	{{ field }}
+	{{ field.errors }}
+	{% endfor %}
+	</div>
 	<input type="submit" value="Отправить" class="btn btn-primary"/>
 </form>
 {% endblock %}

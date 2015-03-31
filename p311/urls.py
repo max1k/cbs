@@ -7,7 +7,8 @@ urlpatterns = patterns('',
 	url(r'^$', P311ListView.as_view(), name='p311-list'),
 	url(r'^page(?P<page>\d+)/$', P311ListView.as_view(), name='p311-list-page'),
 	url(r'^awaiting-response/$', P311UnansweredListView.as_view(), name='p311-unanswered'),
-	
+	url(r'^(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/$', P311ListView.as_view(), name='p311-list-date'),
+
 	url(r'^file(?P<pk>\d+)/$', P311DetailView.as_view(), name='p311-detail'),
 	url(r'^new/$', UploadFileView.as_view(), name='p311-new'),
 	url(r'^success-add/$', RedirectView.as_view(url='../'), name='p311-success-add'),
