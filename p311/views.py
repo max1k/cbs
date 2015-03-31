@@ -13,10 +13,10 @@ from datetime import datetime
 class P311ListView(ListView):
 	model = File
 	context_object_name = 'files'
-	paginate_by = 15
+	paginate_by = 18
 
 	def get_queryset(self):
-		qs = File.objects.all().order_by('-doc_date')
+		qs = self.model.objects.all().order_by('-doc_date')
 		return qs
 
 class P311OrgListView(P311ListView):
@@ -25,17 +25,18 @@ class P311OrgListView(P311ListView):
 		return qs
 
 class P311UnansweredListView(P311ListView):
-	paginate_by = 200
+	paginate_by = 0
 	def get_queryset(self):
-		qs = File.objects.all()
+		qs = self.model.objects.all()
 		such_fiz=qs.filter(name__startswith='SFC').filter(result__service='nal')
 		such_ur= qs.filter(name__startswith='SBC').filter(result__service='nal').filter(result__service='pfr').filter(result__service='fss')
 		return qs.exclude(pk__in=such_fiz).exclude(pk__in=such_ur)
 
 class P311DateListView(P311ListView):
+	paginate_by = 0
 	def get_queryset(self):
-		date_doc=datetime.strptime('{0}/{1}}/{2}'.format(self.kwargs['year'],self.kwargs['month'],self.kwargs['day']),'%Y/%m/%d')
-		qs = super(P311ListView, self).get_queryset().filter(date_doc=date_doc)
+		doc_date=datetime.strptime('{0}/{1}/{2}'.format(self.kwargs['year'],self.kwargs['month'],self.kwargs['day']),'%Y/%m/%d')
+		qs = super(P311ListView, self).get_queryset().filter(doc_date=doc_date)
 		return qs
 
 class P311DetailView(DetailView):

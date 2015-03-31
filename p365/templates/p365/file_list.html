@@ -13,9 +13,9 @@
         {% elif file.is_sent %}<tr class="info">
         {% else %}<tr class="warning">
         {% endif %}
-    		<td><a href="{% url 'p311-list-date' file.doc_date|date:'Y' file.doc_date|date:'m' file.doc_date|date:'d' %}">{{ file.doc_date|date:"d.m.Y" }}</a></td>
-        	<td><a href="{% url 'p311-detail' file.pk %}">{{ file.name }}</a></td>
-        	<td><a href="{% url 'p311-orgmessage' file.orgname %}">{{ file.orgname }}</a></td>
+    		<td><a href="{% url 'p365-list-date' file.doc_date|date:'Y' file.doc_date|date:'m' file.doc_date|date:'d' %}">{{ file.doc_date|date:"d.m.Y" }}</a></td>
+        	<td><a href="{% url 'p365-detail' file.pk %}">{{ file.name }}</a></td>
+        	<td><a href="{% url 'p365-orgmessage' file.orgname %}">{{ file.orgname }}</a></td>
         </tr>
     {% empty %}
     <p>Нет записей</p>
@@ -34,19 +34,19 @@
     
     {% if page_obj.has_previous %}
     <li>      
-      <a href="{% url 'p311-list-page' 1 %}" aria-label="First">
+      <a href="{% url 'p365-list-page' 1 %}" aria-label="First">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li><a href="{% url 'p311-list-page' page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a></li>
+    <li><a href="{% url 'p365-list-page' page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a></li>
     {% endif %}
     
     <li class="active"><a href="#">{{ page_obj.number }}<span class="sr-only">(current)</span></a></li>
 
     {% if page_obj.has_next %}
-    <li><a href="{% url 'p311-list-page' page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a></li>
+    <li><a href="{% url 'p365-list-page' page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a></li>
     <li>
-      <a href="{% url 'p311-list-page' page_obj.paginator.num_pages %}" aria-label="Last">
+      <a href="{% url 'p365-list-page' page_obj.paginator.num_pages %}" aria-label="Last">
         <span aria-hidden="true">&raquo;</span>
     </a>
     </li>
