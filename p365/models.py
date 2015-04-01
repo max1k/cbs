@@ -24,4 +24,4 @@ class Sent(CommonInfo):
 class Result(CommonInfo):
 	out_file = models.ForeignKey(Sent)
 	processed = models.BooleanField(default=False)
-	description = models.CharField(max_length=250, null=True)
+	description = models.CharField(max_length=400, null=True)

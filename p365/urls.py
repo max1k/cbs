@@ -6,7 +6,7 @@ from p365.views import P365ListView, UploadFileView
 
 urlpatterns = patterns('',
     url(r'^$', P365ListView.as_view(), name='p365-list'),
-    url(r'^page(?P<page>\d+)/$', P365ListView.as_view(), name='p311-list-page'),
+    url(r'^page(?P<page>\d+)/$', P365ListView.as_view(), name='p365-list-page'),
     #url(r'^awaiting-response/$', P311UnansweredListView.as_view(), name='p311-unanswered'),
     #url(r'^(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/$', P311DateListView.as_view(), name='p311-list-date'),
 

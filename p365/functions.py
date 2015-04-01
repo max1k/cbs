@@ -72,4 +72,10 @@ def get_sent_file_doc_date(text, prefix):
         doc_date = datetime.strptime(re_search(r'ДатаСооб:(?P<param>\d{2}\.\d{2}\.\d{4})\r\n', text), "%d.%m.%Y") #DD.MM.YYYY
 
 def get_kwt_file_doc_date(text):
-    result_code=re_search(r'###\r\n(?P<param>\d{4}-\d{2}-\d{2})@@@\r\n', text)
+    #doc_date, processed, description
+    doc_date = datetime.strptime(re_search(r'\r\n(?P<param>\d{4}-\d{2}-\d{2})@@@\r\n', text), "%Y-%m-%d")
+    result_code = re_search(r'###\r\n(?P<param>[^@]+)@@@', text)
+    if result_code == '20':
+        return doc_date, True, '20 - Принят'
+    else:
+        return doc_date, False, result_code
