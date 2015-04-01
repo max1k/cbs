@@ -14,8 +14,8 @@ def handle_file(f):
         #if file already loaded then do nothing
         if not count:
             doc_date, orgname = get_doc_date_n_org_name(f)
-            f=File(name=fname, orgname=orgname, doc_date=doc_date)
-            f.save()
+            new_file = File(name=fname, orgname=orgname, doc_date=doc_date)
+            new_file.save()
     elif count and fname.upper()[:3] in ('SBF', 'SBP', 'SBR', 'SFF', 'SFE', 'SBE'):
         doc_date, service, processed, description = get_FRP_process_status(f)
         r = Result(
