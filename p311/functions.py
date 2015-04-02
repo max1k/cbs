@@ -5,7 +5,7 @@ from datetime import datetime
 
 def handle_file(f):
     
-    fname = f.name
+    fname = f.name.upper()
     count = File.objects.filter(name__endswith=fname[3:]).count()
     if count:
         current_file=File.objects.get(name__endswith=fname[3:])
@@ -55,7 +55,7 @@ def get_doc_date_n_org_name(f):
                             )
 
 def process_UV_file(f):
-    fname=f.name
+    fname=f.name.upper()
     service='cb'
     root = fromstring(f.read())
     description=root.find('REZ_ARH').text

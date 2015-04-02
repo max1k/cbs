@@ -13,9 +13,9 @@
         {% elif file.is_sent %}<tr class="info">
         {% else %}<tr class="warning">
         {% endif %}
-            <td>{{ file.doc_date|date:"d.m.Y" }}</td>
-            <td>{{ file.name }}</td>
-            <td>{{ file.orgname }}</td>
+            <td><a href="{% url 'p365-list-date' file.doc_date|date:"Y" file.doc_date|date:"m" file.doc_date|date:"d" %}">{{ file.doc_date|date:"d.m.Y" }}</a></td>
+            <td><a href="{% url 'p365-detail' file.pk %}">{{ file.name }}</a></td>
+            <td><a href="{% url 'p365-orgmessage' file.orgname %}">{{ file.orgname }}</a></td>
         </tr>
     {% empty %}
     <p>Нет записей</p>

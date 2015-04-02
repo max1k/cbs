@@ -70,6 +70,7 @@ def get_sent_file_doc_date(text, prefix):
         doc_date = datetime.strptime(re_search(r'\r\n(?P<param>\d{4}-\d{2}-\d{2})@@@\r\n', text), "%Y-%m-%d") #YYYY-MM-DD
     else:
         doc_date = datetime.strptime(re_search(r'ДатаСооб:(?P<param>\d{2}\.\d{2}\.\d{4})\r\n', text), "%d.%m.%Y") #DD.MM.YYYY
+    return doc_date
 
 def get_kwt_file_doc_date(text):
     #doc_date, processed, description

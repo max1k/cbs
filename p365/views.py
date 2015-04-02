@@ -1,5 +1,5 @@
 #from django.shortcuts import render
-from django.views.generic import ListView, FormView
+from django.views.generic import ListView, FormView, DetailView
 from django.core.urlresolvers import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -7,14 +7,34 @@ from django.utils.decorators import method_decorator
 from p365.models import File
 from p365.forms import UploadFileForm
 from p365.functions import handle_file
+from datetime import datetime
 
 class P365ListView(ListView):
 	model=File
 	context_object_name='files'
-	paginate_by='18'
+	paginate_by=18
 
 	def get_queryset(self):
 		qs=self.model.objects.all().order_by('-doc_date')
+		return qs
+
+class P365UnansweredListView(P365ListView):
+	paginate_by=0
+
+	def get_queryset(self):
+		qs=super(P365ListView, self).get_queryset().filter(sent__result__isnull=True)
+		return qs
+
+class P365OrgListView(P365ListView):
+	def get_queryset(self):
+		qs = super(P365ListView, self).get_queryset().filter(orgname=self.kwargs['orgname'])
+		return qs
+
+class P365DateListView(P365ListView):
+	paginate_by = 0
+	def get_queryset(self):
+		doc_date=datetime.strptime('{0}/{1}/{2}'.format(self.kwargs['year'],self.kwargs['month'],self.kwargs['day']),'%Y/%m/%d')
+		qs = super(P365ListView, self).get_queryset().filter(doc_date=doc_date)
 		return qs
 
 class UploadFileView(FormView):
@@ -29,3 +49,6 @@ class UploadFileView(FormView):
 	@method_decorator(csrf_exempt)
 	def dispatch(self, *args, **kwargs):
 		return super(UploadFileView, self).dispatch(*args, **kwargs)
+
+class P365DetailView(DetailView):
+	model = File

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table">
+<tr class="info">
+    <td>{{ file.name }}</td>
+    <td>{{ file.doc_date|date:"d.m.Y" }}</td>
+    <td colspan="3">{{ file.orgname }}</td>
+</tr>
+<tr class="warning">
+<td colspan="2">Ответные сообщения</td>
+<td colspan="3">Результат обработки</td>
+</tr>
+{% for sent in file.sent_set.all %}
+{% for result in sent.result_set.all %}
+{% if result.processed %}<tr class="success">{% else %}<tr class="error">{% endif %}
+    <td>{{ sent.name }}</td>
+    <td>{{ sent.doc_date|date:"d.m.Y" }}</td>
+    <td>{{ result.name }}</td>
+    <td>{{ result.doc_date|date:"d.m.Y" }}</td>
+    <td>{{ result.description }}</td>
+</tr>
+{% endfor %}
+{% endfor %}
+</table>
+<a href="{% url 'p365-list' %}">← К списку сообщений</a>
+{% endblock %}
